@@ -222,3 +222,4 @@ Agora você tem a **TaskManager API** rodando localmente! 🎉
 
 Se tiver dúvidas ou sugestões, **abra uma issue** no repositório. 🚀
 
+OBS : Já Deixei o appsettings.json configurado mesmo que não seja usual incluir no commit para ver a abordagem usada ou se quiserem usar a mesma config que a minha.
