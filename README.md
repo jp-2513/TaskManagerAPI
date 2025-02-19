@@ -12,6 +12,7 @@ Uma API para gerenciamento de tarefas com autenticação JWT, arquitetura modula
 - [🚀 Rodando com IIS Express](#rodando-com-iis-express)
 - [📂 Subindo a API a partir do Repositório](#subindo-a-api-a-partir-do-repositório)
 - [📄 Documentação da API](#documentação-da-api)
+- [📜 Logs da Aplicação](#logs-da-aplicação)
 
 ---
 
@@ -29,7 +30,7 @@ Antes de iniciar, você precisará ter instalado:
 
 ## ⚙️ Configuração do Banco de Dados
 
-A API usa **PostgreSQL** com**o banco de dados principal. Para configur**ar:
+A API usa **PostgreSQL** como banco de dados principal. Para configurar:
 
 1️⃣ **Crie um banco de dados no PostgreSQL**
 
@@ -37,7 +38,7 @@ A API usa **PostgreSQL** com**o banco de dados principal. Para configur**ar:
 CREATE DATABASE taskmanager_db;
 ```
 
-2️⃣ **Configure a string de conexão no ****`appsettings.json`**
+2️⃣ **Configure a string de conexão no **`appsettings.json`**
 
 ```json
 "ConnectionStrings": {
@@ -64,7 +65,7 @@ dotnet ef database update
 
 A API usa **JWT (JSON Web Token)** para autenticação. Para acessar as rotas protegidas:
 
-1️⃣ **Crie um usuário via endpoint de registro (****`/api/auth/register`****)**
+1️⃣ **Crie um usuário via endpoint de registro (`/api/auth/register`)**
 
 ```json
 {
@@ -74,7 +75,7 @@ A API usa **JWT (JSON Web Token)** para autenticação. Para acessar as rotas pr
 }
 ```
 
-2️⃣ **Faça login para obter o token JWT (****`/api/auth/login`****)**
+2️⃣ **Faça login para obter o token JWT (`/api/auth/login`)**
 
 ```json
 {
@@ -216,10 +217,21 @@ A API está documentada com **Swagger**.
 
 ---
 
+## 📜 Logs da Aplicação
+
+Os logs da aplicação são gerados automaticamente e armazenados na pasta:
+
+```
+/logs
+```
+
+Essa pasta está na raiz do projeto.
+
+---
+
 ## 🎯 Conclusão
 
 Agora você tem a **TaskManager API** rodando localmente! 🎉
 
 Se tiver dúvidas ou sugestões, **abra uma issue** no repositório. 🚀
 
-OBS : Já Deixei o appsettings.json configurado mesmo que não seja usual incluir no commit para ver a abordagem usada ou se quiserem usar a mesma config que a minha.
