@@ -8,11 +8,11 @@ Uma API para gerenciamento de tarefas com autenticação JWT, arquitetura modula
 - [⚙️ Configuração do Banco de Dados](#configuração-do-banco-de-dados)
 - [🔐 Autenticação e Autorização](#autenticação-e-autorização)
 - [🏗️ Arquitetura da Aplicação](#arquitetura-da-aplicação)
+- [🧪 Testes Unitários](#testes-unitários)
 - [💻 Executando o Projeto Localmente](#executando-o-projeto-localmente)
 - [🚀 Rodando com IIS Express](#rodando-com-iis-express)
 - [📂 Subindo a API a partir do Repositório](#subindo-a-api-a-partir-do-repositório)
 - [📄 Documentação da API](#documentação-da-api)
-- [📜 Logs da Aplicação](#logs-da-aplicação)
 
 ---
 
@@ -38,7 +38,7 @@ A API usa **PostgreSQL** como banco de dados principal. Para configurar:
 CREATE DATABASE taskmanager_db;
 ```
 
-2️⃣ **Configure a string de conexão no **`appsettings.json`**
+2️⃣ **Configure a string de conexão no `appsettings.json`**
 
 ```json
 "ConnectionStrings": {
@@ -121,6 +121,26 @@ A API segue uma arquitetura modular baseada em **Camadas (Layers)**:
 - **Repositories**: Abstraem o acesso ao banco de dados.
 - **DTOs**: Evitam expor diretamente os modelos da base de dados.
 - **Validators**: Usam **FluentValidation** para validar dados de entrada.
+
+---
+
+## 🧪 Testes Unitários
+
+O projeto de testes está dentro da aplicação, na pasta **TaskManagerAPI.Tests**.
+Para adicioná-lo à solução principal:
+
+1️⃣ **Abra o Visual Studio**
+2️⃣ **Clique com o botão direito na solução > Adicionar > Projeto existente**
+3️⃣ **Selecione `TaskManagerAPI.Tests.csproj`**
+4️⃣ **No projeto principal, adicione uma referência ao projeto de testes**
+
+Depois disso pode excluir a pasta TaskManagerAPI.Tests na Raiz do projeto
+
+Para rodar os testes:
+
+```sh
+dotnet test
+```
 
 ---
 
@@ -207,25 +227,6 @@ git push origin minha-feature
 A API está documentada com **Swagger**.
 
 - **Rodando localmente**: Acesse [`https://localhost:5001/swagger`](https://localhost:5001/swagger)
-- **Endpoints disponíveis**:
-  - `POST /api/auth/register` → Criar um usuário
-  - `POST /api/auth/login` → Obter um token JWT
-  - `GET /api/tasks` → Listar todas as tarefas (requer autenticação)
-  - `POST /api/tasks` → Criar uma nova tarefa (usuário autenticado)
-  - `PUT /api/tasks/{id}` → Atualizar uma tarefa (somente criador)
-  - `DELETE /api/tasks/{id}` → Excluir uma tarefa (somente criador)
-
----
-
-## 📜 Logs da Aplicação
-
-Os logs da aplicação são gerados automaticamente e armazenados na pasta:
-
-```
-/logs
-```
-
-Essa pasta está na raiz do projeto.
 
 ---
 
