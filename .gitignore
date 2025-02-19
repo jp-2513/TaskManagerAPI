@@ -1,0 +1,75 @@
+# ⚡ .NET 8.0 Git Ignore
+
+# 🔹 Build results
+bin/
+obj/
+out/
+
+# 🔹 Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# 🔹 Rider / JetBrains
+.idea/
+*.sln.iml
+
+# 🔹 OS Files
+Thumbs.db
+ehthumbs.db
+.DS_Store
+.DS_Store?
+
+# 🔹 Logs
+logs/
+*.log
+*.tlog
+
+# 🔹 NuGet Packages
+*.nupkg
+packages/
+project.lock.json
+project.assets.json
+nuget.config
+*.nuspec
+*.cache
+
+# 🔹 Resharper / Code Analysis
+*.DotSettings.user
+*.resharper
+*_ReSharper.*
+
+# 🔹 Test Results
+TestResults/
+ncrunch/
+ncrunchproject/
+
+# 🔹 Entity Framework Migrations
+Migrations/
+
+# 🔹 User Secrets (Exceto )
+secrets.json
+.env
+.env.*
+
+# 🔹 ASP.NET Generated Files
+wwwroot/node_modules/
+node_modules/
+npm-debug.log
+yarn-error.log
+coverage/
+
+# 🔹 Docker
+Dockerfile
+.dockerignore
+**/docker-compose*.yml
+**/docker-compose*.override.yml
+
+# 🔹 macOS
+*.DS_Store
+
+# 🔹 Windows
+*.lnk
+
