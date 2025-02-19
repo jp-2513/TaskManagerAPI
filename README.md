@@ -1,97 +1,108 @@
-TaskManager API 🚀
+# TaskManager API 🚀
 
 Uma API para gerenciamento de tarefas com autenticação JWT, arquitetura modular e banco de dados PostgreSQL.
 
-📋 Sumário
+## 📋 Sumário
 
-📦 Pré-requisitos
+- [📦 Pré-requisitos](#pré-requisitos)
+- [⚙️ Configuração do Banco de Dados](#configuração-do-banco-de-dados)
+- [🔐 Autenticação e Autorização](#autenticação-e-autorização)
+- [🏗️ Arquitetura da Aplicação](#arquitetura-da-aplicação)
+- [💻 Executando o Projeto Localmente](#executando-o-projeto-localmente)
+- [🚀 Rodando com IIS Express](#rodando-com-iis-express)
+- [📂 Subindo a API a partir do Repositório](#subindo-a-api-a-partir-do-repositório)
+- [📄 Documentação da API](#documentação-da-api)
 
-⚙️ Configuração do Banco de Dados
+---
 
-🔐 Autenticação e Autorização
-
-🏗️ Arquitetura da Aplicação
-
-💻 Executando o Projeto Localmente
-
-🚀 Rodando com IIS Express
-
-📂 Subindo a API a partir do Repositório
-
-📄 Documentação da API
-
-📦 Pré-requisitos
+## 📦 Pré-requisitos
 
 Antes de iniciar, você precisará ter instalado:
 
-.NET 8 SDK
+- [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- [PostgreSQL](https://www.postgresql.org/download/)
+- [Git](https://git-scm.com/downloads)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/pt-br/downloads/)
+- [IIS Express](https://learn.microsoft.com/en-us/iis/extensions/introduction-to-iis-express/iis-express-overview)
 
-PostgreSQL
+---
 
-Git
+## ⚙️ Configuração do Banco de Dados
 
-Visual Studio 2022
+A API usa **PostgreSQL** com**o banco de dados principal. Para configur**ar:
 
-IIS Express
+1️⃣ **Crie um banco de dados no PostgreSQL**
 
-⚙️ Configuração do Banco de Dados
-
-A API usa PostgreSQL como banco de dados principal. Para configurar:
-
-1️⃣ Crie um banco de dados no PostgreSQL
-
+```sql
 CREATE DATABASE taskmanager_db;
+```
 
-2️⃣ **Configure a string de conexão no **appsettings.json
+2️⃣ **Configure a string de conexão no ****`appsettings.json`**
 
+```json
 "ConnectionStrings": {
   "DefaultConnection": "Host=localhost;Port=5432;Database=taskmanager_db;Username=seu_usuario;Password=sua_senha"
 }
+```
 
-3️⃣ Execute as migrations para criar as tabelas
+3️⃣ **Execute as migrations para criar as tabelas**
 
+```sh
 dotnet ef database update
+```
 
 Se precisar criar uma nova migration:
 
+```sh
 dotnet ef migrations add NomeDaMigration
 dotnet ef database update
+```
 
-🔐 Autenticação e Autorização
+---
 
-A API usa JWT (JSON Web Token) para autenticação. Para acessar as rotas protegidas:
+## 🔐 Autenticação e Autorização
 
-1️⃣ Crie um usuário via endpoint de registro (/api/auth/register)
+A API usa **JWT (JSON Web Token)** para autenticação. Para acessar as rotas protegidas:
 
+1️⃣ **Crie um usuário via endpoint de registro (****`/api/auth/register`****)**
+
+```json
 {
   "name": "John Doe",
   "email": "johndoe@email.com",
   "password": "123456"
 }
+```
 
-2️⃣ Faça login para obter o token JWT (/api/auth/login)
+2️⃣ **Faça login para obter o token JWT (****`/api/auth/login`****)**
 
+```json
 {
   "email": "johndoe@email.com",
   "password": "123456"
 }
+```
 
 Resposta esperada:
 
+```json
 {
   "token": "seu-token-aqui"
 }
+```
 
-3️⃣ Use o token nas requisições
+3️⃣ **Use o token nas requisições**
 
-No Swagger, clique em Authorize e insira Bearer SEU_TOKEN.
+- No **Swagger**, clique em **Authorize** e insira `Bearer SEU_TOKEN`.
+- Ou no **Postman**, adicione `Authorization: Bearer SEU_TOKEN` no Header.
 
-Ou no Postman, adicione Authorization: Bearer SEU_TOKEN no Header.
+---
 
-🏗️ Arquitetura da Aplicação
+## 🏗️ Arquitetura da Aplicação
 
-A API segue uma arquitetura modular baseada em Camadas (Layers):
+A API segue uma arquitetura modular baseada em **Camadas (Layers)**:
 
+```
 📂 TaskManagerAPI
  ├── 📂 Controllers        # Controladores da API
  ├── 📂 Services           # Regras de negócio (camada de serviço)
@@ -102,89 +113,112 @@ A API segue uma arquitetura modular baseada em Camadas (Layers):
  ├── 📂 Tests              # Testes unitários (XUnit + FluentAssertions + Moq)
  ├── 📄 Program.cs         # Ponto de entrada da aplicação
  ├── 📄 appsettings.json   # Configurações da API
+```
 
-Controllers: Apenas expõem os endpoints e chamam os Services.
+- **Controllers**: Apenas expõem os endpoints e chamam os **Services**.
+- **Services**: Contêm a lógica de negócios e validações.
+- **Repositories**: Abstraem o acesso ao banco de dados.
+- **DTOs**: Evitam expor diretamente os modelos da base de dados.
+- **Validators**: Usam **FluentValidation** para validar dados de entrada.
 
-Services: Contêm a lógica de negócios e validações.
+---
 
-Repositories: Abstraem o acesso ao banco de dados.
+## 💻 Executando o Projeto Localmente
 
-DTOs: Evitam expor diretamente os modelos da base de dados.
+1️⃣ **Clone o repositório**
 
-Validators: Usam FluentValidation para validar dados de entrada.
-
-💻 Executando o Projeto Localmente
-
-1️⃣ Clone o repositório
-
+```sh
 git clone https://github.com/seu-usuario/taskmanager-api.git
 cd taskmanager-api
+```
 
-2️⃣ Instale as dependências
+2️⃣ **Instale as dependências**
 
+```sh
 dotnet restore
+```
 
-3️⃣ Configure o banco de dados
+3️⃣ **Configure o banco de dados**
 
+```sh
 dotnet ef database update
+```
 
-4️⃣ Execute a API
+4️⃣ **Execute a API**
 
+```sh
 dotnet run
+```
 
-A API estará disponível em https://localhost:5001 ou http://localhost:5000.
+A API estará disponível em `https://localhost:5001` ou `http://localhost:5000`.
 
-🚀 Rodando com IIS Express
+---
 
-Caso queira rodar via IIS Express no Visual Studio:
+## 🚀 Rodando com IIS Express
 
-1️⃣ Abra a solução no Visual Studio
-2️⃣ Clique no menu "Debug" > "Iniciar Sem Depuração" (Ctrl + F5)
-3️⃣ O Visual Studio abrirá o navegador com o Swagger carregado
+Caso queira rodar via **IIS Express** no Visual Studio:
+
+1️⃣ **Abra a solução no Visual Studio**
+2️⃣ **Clique no menu "Debug" > "Iniciar Sem Depuração" (Ctrl + F5)**
+3️⃣ **O Visual Studio abrirá o navegador com o Swagger carregado**
 
 Se precisar configurar a porta:
 
-No Properties > launchSettings.json, edite:
+- No **Properties > launchSettings.json**, edite:
 
+```json
 "applicationUrl": "https://localhost:44309"
+```
 
-📂 Subindo a API a partir do Repositório
+---
+
+## 📂 Subindo a API a partir do Repositório
 
 Para contribuir ou rodar o projeto em outro ambiente:
 
-1️⃣ Clone o repositório
+1️⃣ **Clone o repositório**
 
+```sh
 git clone https://github.com/seu-usuario/taskmanager-api.git
 cd taskmanager-api
+```
 
-2️⃣ Crie um novo branch
+2️⃣ **Crie um novo branch**
 
+```sh
 git checkout -b minha-feature
+```
 
-3️⃣ Faça suas alterações e commit
+3️⃣ **Faça suas alterações e commit**
 
+```sh
 git add .
 git commit -m "Minha feature implementada"
 git push origin minha-feature
+```
 
-4️⃣ Crie um Pull Request (PR) no GitHub e aguarde a revisão.
+4️⃣ **Crie um Pull Request (PR) no GitHub** e aguarde a revisão.
 
-📄 Documentação da API
+---
 
-A API está documentada com Swagger.
+## 📄 Documentação da API
 
-Rodando localmente: Acesse https://localhost:5001/swagger
+A API está documentada com **Swagger**.
 
-Endpoints disponíveis:
+- **Rodando localmente**: Acesse [`https://localhost:5001/swagger`](https://localhost:5001/swagger)
+- **Endpoints disponíveis**:
+  - `POST /api/auth/register` → Criar um usuário
+  - `POST /api/auth/login` → Obter um token JWT
+  - `GET /api/tasks` → Listar todas as tarefas (requer autenticação)
+  - `POST /api/tasks` → Criar uma nova tarefa (usuário autenticado)
+  - `PUT /api/tasks/{id}` → Atualizar uma tarefa (somente criador)
+  - `DELETE /api/tasks/{id}` → Excluir uma tarefa (somente criador)
 
-POST /api/auth/register → Criar um usuário
+---
 
-POST /api/auth/login → Obter um token JWT
+## 🎯 Conclusão
 
-GET /api/tasks → Listar todas as tarefas (requer autenticação)
+Agora você tem a **TaskManager API** rodando localmente! 🎉
 
-POST /api/tasks → Criar uma nova tarefa (usuário autenticado)
+Se tiver dúvidas ou sugestões, **abra uma issue** no repositório. 🚀
 
-PUT /api/tasks/{id} → Atualizar uma tarefa (somente criador)
-
-DELETE /api/tasks/{id} → Excluir uma tarefa (somente criador)
